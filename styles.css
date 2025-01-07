@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  height: auto;
+  font-size: 30px;
+}
+
+.container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="number"] {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.container input[type="radio"] {
+  margin-right: 0px;
+}
+
+
+h3 {
+  color: blue;
+}
+
+p {
+  color: red;
+}
+
+/* .container1 {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  height: auto;
+  font-size: 30px;
+  flex: 5;
+}
+
+.container1 h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container1 input[type="text"],
+.container1 input[type="email"],
+.container1 input[type="number"] {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.container1 input[type="radio"] {
+  margin-right: 0px;
+}
+
+.container,
+.container1 {
+  display: flex;
+} */
