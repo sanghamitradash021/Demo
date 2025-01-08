@@ -4,84 +4,314 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+
+
+  
+
+  background-color: rgb(230, 198, 135);
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  
 }
+
 
 .container {
-  background-color: #fff;
-  padding: 10px;
+
+  background-color: #FAD961;
+  background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+  
+  
+  
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px;
+  width: auto;
   height: auto;
-  font-size: 30px;
+  font-size: 18px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  transform: translateY(-20px);
+
+
+
 }
 
-.container h3 {
-  text-align: center;
-  margin-bottom: 20px;
+.header{
+   display:flex;
+   align-items:center;
+   margin-bottom: 20px;
 }
-
-.container input[type="text"],
-.container input[type="email"],
-.container input[type="number"] {
-  width: 50%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.container input[type="radio"] {
-  margin-right: 0px;
-}
-
-
-h3 {
-  color: blue;
-}
-
-p {
-  color: red;
-}
-
-/* .container1 {
-  background-color: #fff;
-  padding: 10px;
+ 
+.form-img{
+  max-width: 80px;
+  height: auto;
+  margin-right: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 600px;
-  height: auto;
-  font-size: 30px;
-  flex: 5;
 }
 
-.container1 h3 {
+/* h3{
+  margin:0;
+  color: rgb(247, 232, 98);
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue;
+  opacity:0;
+  animation: slideIn ls forwards 0.5s;
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.container1 input[type="text"],
-.container1 input[type="email"],
-.container1 input[type="number"] {
-  width: 50%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.container1 input[type="radio"] {
-  margin-right: 0px;
-}
-
-.container,
-.container1 {
-  display: flex;
 } */
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 250px;
+  /* color: #3109e0;
+  text-shadow: 2px 2px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue; */
+  color: rgb(9, 35, 70);
+  
+  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+  opacity: 0;
+  animation: slideIn 1s forwards 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+
+  /* margin-bottom: 20px;
+  color: rgb(247, 232, 98);
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue;
+  opacity:0;
+  animation: slideIn ls forwards 0.5s;
+  text-align: center; */ 
+
+
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: formGroupAppear 1s forwards 1s;
+}
+
+@keyframes formGroupAppear {
+  0% {
+      opacity: 0;
+      transform: translateX(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+.form-group label {
+  width: 200px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group input[list="mediums"],
+.form-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[list="mediums"]:focus,
+.form-group select:focus {
+  border-color: #ff9a9e;
+  box-shadow: 0 0 5px rgba(255, 154, 158, 0.5);
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-group input[type="radio"],
+.checkbox-group input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.radio-group label,
+.checkbox-group label {
+  margin-right: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3109e0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* @media (max-width: 600px) {
+  .container {
+      width: 90%;
+  }
+
+  .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .form-group label {
+      width: auto;
+      margin-bottom: 5px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group input[list="mediums"],
+  .form-group select {
+      width: 100%;
+  }
+
+  .radio-group, .checkbox-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+} */
+
+/* Phones (Portrait) */
+@media (max-width: 480px) {
+  .container {
+      width: 100%;
+      padding: 15px;
+  }
+
+  .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .form-group label {
+      width: auto;
+      margin-bottom: 5px;
+  }
+
+  .form-group textarea,
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group input[list="mediums"],
+  .form-group select {
+      width: 100%;
+  }
+
+  .radio-group, .checkbox-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  button {
+      padding: 12px;
+  }
+}
+/* Phones (Landscape) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .container {
+      width: 80%;
+      padding: 20px;
+  }
+
+  .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group input[list="mediums"],
+  .form-group select {
+      width: 100%;
+  }
+
+  .radio-group, .checkbox-group {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+      width: 70%;
+      padding: 30px;
+  }
+
+  .form-group {
+      flex-direction: row;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group input[list="mediums"],
+  .form-group select {
+      width: 45%;
+  }
+
+  .radio-group, .checkbox-group {
+      flex-direction: row;
+      align-items: center;
+  }
+
+  button {
+      padding: 15px;
+  }
+}
