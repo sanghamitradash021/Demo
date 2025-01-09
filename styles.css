@@ -4,29 +4,19 @@
 
 body {
   font-family: Arial, sans-serif;
-
-
-  
-
   background-color: rgb(230, 198, 135);
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-
-  
+  height: 100%;
+  padding-top: 70px;
 }
 
-
 .container {
-
   background-color: #FAD961;
-  background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
-  
-  
-  
+  background-image: linear-gradient(90deg, #F76B1C 0%,#FAD961 100%);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,18 +26,15 @@ body {
   opacity: 0;
   animation: fadeIn 1s forwards;
   transform: translateY(-20px);
-
-
-
 }
 
-.header{
-   display:flex;
-   align-items:center;
-   margin-bottom: 20px;
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
- 
-.form-img{
+
+.form-img {
   max-width: 80px;
   height: auto;
   margin-right: 10px;
@@ -55,56 +42,34 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* h3{
-  margin:0;
-  color: rgb(247, 232, 98);
-  text-shadow: 1px 1px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue;
-  opacity:0;
-  animation: slideIn ls forwards 0.5s;
-  text-align: center;
-} */
-
 .container h1 {
   text-align: center;
   margin-bottom: 20px;
   margin-left: 250px;
-  /* color: #3109e0;
-  text-shadow: 2px 2px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue; */
   color: rgb(9, 35, 70);
-  
-  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
   opacity: 0;
   animation: slideIn 1s forwards 0.5s;
 }
 
 @keyframes fadeIn {
   0% {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-
-  /* margin-bottom: 20px;
-  color: rgb(247, 232, 98);
-  text-shadow: 1px 1px 2px black, 0 0 25px rgb(17, 30, 212), 0 0 5px darkblue;
-  opacity:0;
-  animation: slideIn ls forwards 0.5s;
-  text-align: center; */ 
-
-
 @keyframes slideIn {
   0% {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -118,12 +83,12 @@ body {
 
 @keyframes formGroupAppear {
   0% {
-      opacity: 0;
-      transform: translateX(-20px);
+    opacity: 0;
+    transform: translateX(-20px);
   }
   100% {
-      opacity: 1;
-      transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -137,7 +102,6 @@ body {
 .form-group input[type="email"],
 .form-group input[type="number"],
 .form-group input[type="tel"],
-.form-group input[list="mediums"],
 .form-group select {
   flex: 1;
   padding: 10px;
@@ -150,27 +114,9 @@ body {
 .form-group input[type="email"]:focus,
 .form-group input[type="number"]:focus,
 .form-group input[type="tel"]:focus,
-.form-group input[list="mediums"]:focus,
 .form-group select:focus {
   border-color: #ff9a9e;
   box-shadow: 0 0 5px rgba(255, 154, 158, 0.5);
-}
-
-.radio-group, .checkbox-group {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 10px;
-}
-
-.radio-group input[type="radio"],
-.checkbox-group input[type="checkbox"] {
-  margin-right: 5px;
-}
-
-.radio-group label,
-.checkbox-group label {
-  margin-right: 15px;
 }
 
 button {
@@ -193,41 +139,36 @@ button:active {
   transform: scale(0.98);
 }
 
-/* @media (max-width: 600px) {
-  .container {
-      width: 90%;
-  }
+/* Flexbox for Country, State, City */
+.form-group select {
+  width: 30%;
+  margin-right: 10px;
+  
+}
+.form-groupz {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form-groupz label {
+  width: 200px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+.form-groupz select {
+  /* width: 30%; */
+  width: 300px;
+  margin-right: 10px;
+  
+}
 
-  .form-group {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-
-  .form-group label {
-      width: auto;
-      margin-bottom: 5px;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="email"],
-  .form-group input[type="number"],
-  .form-group input[type="tel"],
-  .form-group input[list="mediums"],
-  .form-group select {
-      width: 100%;
-  }
-
-  .radio-group, .checkbox-group {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-} */
 
 /* Phones (Portrait) */
 @media (max-width: 480px) {
   .container {
       width: 100%;
       padding: 15px;
+      height: auto;
   }
 
   .form-group {
@@ -246,6 +187,7 @@ button:active {
   .form-group input[type="number"],
   .form-group input[type="tel"],
   .form-group input[list="mediums"],
+  .form-groupz select,
   .form-group select {
       width: 100%;
   }
@@ -258,9 +200,9 @@ button:active {
   button {
       padding: 12px;
   }
-}
+} 
 /* Phones (Landscape) */
-@media (min-width: 481px) and (max-width: 767px) {
+ @media (min-width: 481px) and (max-width: 767px) {
   .container {
       width: 80%;
       padding: 20px;
@@ -276,6 +218,7 @@ button:active {
   .form-group input[type="number"],
   .form-group input[type="tel"],
   .form-group input[list="mediums"],
+  .form-groupz select,
   .form-group select {
       width: 100%;
   }
@@ -284,12 +227,12 @@ button:active {
       flex-direction: column;
       align-items: flex-start;
   }
-}
+} 
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1024px) {
   .container {
-      width: 70%;
+      width: auto;
       padding: 30px;
   }
 
@@ -297,11 +240,16 @@ button:active {
       flex-direction: row;
   }
 
+  .form-groupz {
+    flex-direction: row;
+}
+
   .form-group input[type="text"],
   .form-group input[type="email"],
   .form-group input[type="number"],
   .form-group input[type="tel"],
   .form-group input[list="mediums"],
+  .form-groupz select,
   .form-group select {
       width: 45%;
   }
@@ -314,4 +262,41 @@ button:active {
   button {
       padding: 15px;
   }
+} 
+
+
+
+/* Media Queries */
+@media (max-width: 480px) {
+  .container {
+    width: auto;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-group select {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .form-groupz {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  .form-groupz select{
+    width: 100%;
+    margin-right: 0;
+  }
+
+  button {
+    padding: 12px;
+  }
 }
+
