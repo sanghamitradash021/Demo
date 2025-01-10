@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form with Real-Time Validation</title>
+  <title>Form and informations</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     
     .flex-container {
       display: flex;
+      flex-direction: row;
       justify-content: space-between; 
       gap: 20px; 
       max-width: 1200px;
@@ -30,7 +31,7 @@
     /* Right Container */
     .table-container {
        width: 48%;   
-      overflow-x: auto;
+      /* overflow-x: auto; */
     }
 
     
@@ -107,29 +108,14 @@
     }
 
 
-    @media(max-width: 768px){
-      .form-container,
-      .table-container{
-        padding: 10px;
+    @media (max-width:768px){
+      .flex-container{
+        flex-direction: column;
       }
-      h1,h2{
-        font-size: 0.9rem;
-        padding: 8px;
-      }
-      .action-buttons button{
-        font-size: 12px;
-        padding: 8px;
-      }
-      .action-buttons button{
-        font-size: 12px;
-        padding: 6px 10px;
+      .form-container, .table-container{
+        width: 100%;
       }
     }
-    @media (max-width:480px){
-      .form-container{
-        padding:10px;
-      }
-    } 
 
     /* .flex-container{
       display: grid;
@@ -304,7 +290,7 @@
       <tbody></tbody>
     </table>
   </div>
-  <!-- <div id="notification" class="notification"></div> -->
+  <div id="notification" class="notification"></div>
 
 </div>
 
@@ -384,6 +370,7 @@ function updateCities() {
 
 function saveData(data) {
   let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+
   storedData.push(data);
   localStorage.setItem('formData', JSON.stringify(storedData));
 }
@@ -392,7 +379,7 @@ function saveData(data) {
 function loadSavedData() {
   const storedData = JSON.parse(localStorage.getItem('formData')) || [];
   const tableBody = document.querySelector("#data-table tbody");
-  tableBody.innerHTML = ''; // Clear current table rows
+  tableBody.innerHTML = ''; 
 
   storedData.forEach((data, index) => {
     const row = document.createElement('tr');
@@ -527,16 +514,16 @@ function deleteRow(index) {
       city: form.city.value,
     };
 
-    let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    // let storedData = JSON.parse(localStorage.getItem('formData')) || [];
 
-    let existingData = storedData.find(data => data.email === formData.email || data.phone === formData.phone );
-    if(existingData) {
-      showNotification('the data with this email and phone already exists.');
-      return;
-    }
+    // let existingData = storedData.find(data => data.email === formData.email || data.phone === formData.phone );
+    // if(existingData) {
+    //   showNotification('the data with this email and phone already exists.');
+    //   return;
+    // }
 
     if (currentRow !== null) {
-      // let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+      let storedData = JSON.parse(localStorage.getItem('formData')) || [];
       storedData[currentRow] = formData;
       localStorage.setItem('formData', JSON.stringify(storedData));
       currentRow = null;
@@ -634,16 +621,16 @@ document.getElementById('fullname').addEventListener('blur', () => {
             if (city === "") {
               cityErr.textContent = "Please fill this required field.";}
     });
-    document.getElementById('pincode').addEventListener('input', () => {
-        const pincode = document.getElementById("pincode").value;
-            const pinErr = document.getElementById("pincode_error");
-            if (pincode === "" || pincode.length !== 6) {
-              pinErr.textContent = "Please enter a valid pincode.";
-              return false;
-            }
-            pinErr.textContent = "";
-            return true;
-    });
+    // document.getElementById('pincode').addEventListener('input', () => {
+    //     const pincode = document.getElementById("pincode").value;
+    //         const pinErr = document.getElementById("pincode_error");
+    //         if (pincode === "" || pincode.length !== 6) {
+    //           pinErr.textContent = "Please enter a valid pincode.";
+    //           return false;
+    //         }
+    //         pinErr.textContent = "";
+    //         return true;
+    // });
 
 
     function validateForm() {
