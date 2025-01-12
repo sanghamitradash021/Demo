@@ -37,7 +37,38 @@
     
     .form-group {
       margin-bottom: 15px;
+
+      /* display: flex;
+  flex-direction: column; */
     }
+
+    /* label {
+  margin-bottom: 5px;
+} */
+
+/* input, select, textarea, button {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+} */
+
+/* button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+/* button:hover {
+  background-color: #218838;
+} */
+
+
+    
+
 
     .required::after {
       content: "*";
@@ -48,6 +79,8 @@
     .error-message {
       color: red;
       font-size: 12px;
+      margin-top: 5px;
+      
     }
 
     /* Table styling */
@@ -129,6 +162,31 @@
       }
     } */
 
+
+    .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+
+
+
   </style>
 </head>
 <body>
@@ -141,10 +199,10 @@
     <h1>Registration Form</h1>
     <form id="registrationForm">
       <!-- Full Name -->
-      <div class="form-group">
+      <div  class="form-group">
         <label for="fullname" class="required">Fullname:</label>
-        <input type="text" id="fullname" name="fullname" required>
-        <span id="fullname_error" class="error-message"></span>
+        <input  type="text" id="fullname" name="fullname" required>
+        <span  id="fullname_error" class="error-message"></span>
       </div>
 
       <!-- Phone -->
@@ -217,12 +275,12 @@
         <span id="preferredDate_error" class="error-message"></span>
       </div>
 
-      <!-- File Upload -->
+      <!-- File Upload
       <div class="form-group">
         <label for="file">Upload File:</label>
         <input type="file" id="file" name="filename" />
         <span id="file_error" class="error-message"></span>
-      </div>
+      </div> -->
 
       <!-- Age -->
       <div class="form-group">
@@ -270,6 +328,16 @@
       <button type="button" id="submitBtn" onclick="submitForm()">Submit</button>
     </form>
   </div>
+
+  <div id="confirmDeleteModal" class="modal">
+    <div class="modal-content">
+      <p>Type "delete" to confirm you want to delete this record:</p>
+      <input type="text" id="deleteConfirmationInput" />
+      <button onclick="confirmDelete()">Confirm</button>
+      <button onclick="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+  
 
   <!-- Right Container-->
   <div class="table-container">
@@ -400,45 +468,158 @@ function loadSavedData() {
 }
 
 
+// function editRow(index) {
+//   document.getElementById('submitBtn').textContent = 'Update';
+//   const storedData = JSON.parse(localStorage.getItem('formData')) || [];
+//   const data = storedData[index];
+//   document.getElementById("fullname").value = data.fullname;
+//   document.getElementById("phone").value = data.phone;
+//   // document.getElementById("preferredMedium").value = data.preferredMedium;
+//   // document.getElementById("preferredDate").value = data.preferredDate;
+//   document.getElementById("email").value = data.email;
+//   // document.getElementById("address").value = data.address;
+//   document.getElementById("age").value = data.age;
+//   //   document.getElementById("gender").value = data.gender;
+//   document.getElementById("country").value = data.country;
+  
+//   updateStates();
+//   document.getElementById("state").value = data.state;
+//   updateCities();
+//   document.getElementById("city").value = data.city;
+
+//   // document.getElementById("dob").value = data.dob;
+//   const gender = data.gender;
+//   const experience= data.experience
+//   if (experience) {
+//     document.querySelector(`input[name="experience"][value="${experience}"]`).checked = true;
+//   }
+//   console.log(gender)
+//   if (gender) {
+//     document.querySelector(`input[name="gender"][value="${gender}"]`).checked = true;
+//   }
+//   currentRow = index;
+// }
+
+// Modified submitForm function
+function submitForm() {
+  const form = document.getElementById("registrationForm");
+
+  if (!validateForm()) {
+    return; 
+  }
+
+  const formData = {
+    fullname: form.fullname.value,
+    phone: form.phone.value,
+    email: form.email.value,
+    age: form.age.value,
+    dob: form.dob.value,
+    gender: form.gender.value,
+    experience: form.experience.value,
+    preferredMedium: form.preferredMedium.value,
+    preferredDate: form.preferredDate.value,
+    address: form.address.value,
+    country: form.country.value,
+    state: form.state.value,
+    city: form.city.value,
+  };
+
+  let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+  const existingData = storedData.find(data => data.email === formData.email || data.phone === formData.phone);
+
+  if (existingData && currentRow === null) {
+    showNotification('The data with this email or phone already exists.');
+    return;
+  }
+
+  if (document.getElementById('submitBtn').textContent === 'Update') {
+    storedData[currentRow] = formData;
+    showNotification('Form updated successfully');
+    currentRow = null;
+  } else {
+    if (!existingData) {
+      storedData.push(formData);
+      showNotification('Form submitted successfully');
+    }
+  }
+
+  localStorage.setItem('formData', JSON.stringify(storedData));
+  resetForm();
+  loadSavedData();
+}
+
+// Modify editRow to set currentRow and button text
 function editRow(index) {
   document.getElementById('submitBtn').textContent = 'Update';
   const storedData = JSON.parse(localStorage.getItem('formData')) || [];
   const data = storedData[index];
+  
   document.getElementById("fullname").value = data.fullname;
   document.getElementById("phone").value = data.phone;
-  // document.getElementById("preferredMedium").value = data.preferredMedium;
-  // document.getElementById("preferredDate").value = data.preferredDate;
   document.getElementById("email").value = data.email;
-  // document.getElementById("address").value = data.address;
   document.getElementById("age").value = data.age;
-//   document.getElementById("gender").value = data.gender;
   document.getElementById("country").value = data.country;
-  
   updateStates();
   document.getElementById("state").value = data.state;
   updateCities();
   document.getElementById("city").value = data.city;
 
-  // document.getElementById("dob").value = data.dob;
   const gender = data.gender;
-  const experience= data.experience
-  if (experience) {
-    document.querySelector(`input[name="experience"][value="${experience}"]`).checked = true;
-  }
-  console.log(gender)
   if (gender) {
     document.querySelector(`input[name="gender"][value="${gender}"]`).checked = true;
   }
+
   currentRow = index;
 }
 
 
+// function deleteRow(index) {
+//   let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+//   storedData.splice(index, 1);
+//   localStorage.setItem('formData', JSON.stringify(storedData));
+//   loadSavedData();
+// }
+
+// function deleteRow(index) {
+//   if (confirm("Are you sure you want to delete this record?")) {
+//     let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+//     storedData.splice(index, 1);
+//     localStorage.setItem('formData', JSON.stringify(storedData));
+//     loadSavedData();
+//     showNotification('Data deleted successfully');
+//   }
+// }
+
+let deleteIndex;
+
 function deleteRow(index) {
-  let storedData = JSON.parse(localStorage.getItem('formData')) || [];
-  storedData.splice(index, 1);
-  localStorage.setItem('formData', JSON.stringify(storedData));
-  loadSavedData();
+  deleteIndex = index;
+  document.getElementById('confirmDeleteModal').style.display = 'block';
 }
+
+function confirmDelete() {
+  const userInput = document.getElementById('deleteConfirmationInput').value;
+  if (userInput.toLowerCase() === 'delete') {
+    let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+    storedData.splice(deleteIndex, 1);
+    localStorage.setItem('formData', JSON.stringify(storedData));
+    loadSavedData();
+    showNotification('Data deleted successfully');
+  } else {
+    alert('Action canceled. You did not type "delete".');
+  }
+  closeModal();
+}
+
+function cancelDelete() {
+  closeModal();
+}
+
+function closeModal() {
+  document.getElementById('confirmDeleteModal').style.display = 'none';
+  document.getElementById('deleteConfirmationInput').value = '';
+}
+
 
  
  function showNotification(message) {
@@ -490,52 +671,52 @@ function deleteRow(index) {
 // }
 
  
- function submitForm() {
-    const form = document.getElementById("registrationForm");
+//  function submitForm() {
+//     const form = document.getElementById("registrationForm");
 
     
-    if (!validateForm()) {
-      return; 
-    }
+//     if (!validateForm()) {
+//       return; 
+//     }
 
-    const formData = {
-      fullname: form.fullname.value,
-      phone: form.phone.value,
-      email: form.email.value,
-      age: form.age.value,
-      dob: form.dob.value,
-      gender: form.gender.value,
-      experience: form.experience.value,
-      preferredMedium: form.preferredMedium.value,
-      preferredDate: form.preferredDate.value,
-      address: form.address.value,
-      country: form.country.value,
-      state: form.state.value,
-      city: form.city.value,
-    };
+//     const formData = {
+//       fullname: form.fullname.value,
+//       phone: form.phone.value,
+//       email: form.email.value,
+//       age: form.age.value,
+//       dob: form.dob.value,
+//       gender: form.gender.value,
+//       experience: form.experience.value,
+//       preferredMedium: form.preferredMedium.value,
+//       preferredDate: form.preferredDate.value,
+//       address: form.address.value,
+//       country: form.country.value,
+//       state: form.state.value,
+//       city: form.city.value,
+//     };
 
-    // let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+//     // let storedData = JSON.parse(localStorage.getItem('formData')) || [];
 
-    // let existingData = storedData.find(data => data.email === formData.email || data.phone === formData.phone );
-    // if(existingData) {
-    //   showNotification('the data with this email and phone already exists.');
-    //   return;
-    // }
+//     // let existingData = storedData.find(data => data.email === formData.email || data.phone === formData.phone );
+//     // if(existingData) {
+//     //   showNotification('the data with this email and phone already exists.');
+//     //   return;
+//     // }
 
-    if (currentRow !== null) {
-      let storedData = JSON.parse(localStorage.getItem('formData')) || [];
-      storedData[currentRow] = formData;
-      localStorage.setItem('formData', JSON.stringify(storedData));
-      currentRow = null;
-      showNotification('Form updated successfully');
-    } else {
-      saveData(formData);
-      showNotification('Form submitted successfully');
-    }
+//     if (currentRow !== null) {
+//       let storedData = JSON.parse(localStorage.getItem('formData')) || [];
+//       storedData[currentRow] = formData;
+//       localStorage.setItem('formData', JSON.stringify(storedData));
+//       currentRow = null;
+//       showNotification('Form updated successfully');
+//     } else {
+//       saveData(formData);
+//       showNotification('Form submitted successfully');
+//     }
 
-    resetForm();
-    loadSavedData(); 
-  }
+//     resetForm();
+//     loadSavedData(); 
+//   }
 
 
 function resetForm() {
