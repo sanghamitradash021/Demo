@@ -165,14 +165,14 @@
         </form>
       </div>
 
-      <div id="confirmDeleteModal" class="modal">
+      <!-- <div id="confirmDeleteModal" class="modal">
         <div class="modal-content">
           <p>Type "delete" to confirm you want to delete this record:</p>
           <input type="text" id="deleteConfirmationInput" /><br><br>
-          <button onclick="confirmDelete()">Confirm</button><br><br>
-          <button onclick="cancelDelete()">Cancel</button>
+          <button style="width: 10rem;" onclick="confirmDelete()">Confirm</button><br><br>
+          <button style="width: 10rem;" onclick="cancelDelete()">Cancel</button>
         </div>
-      </div>
+      </div> -->
 
       <!-- Right Container-->
       <div class="table-container">
@@ -194,6 +194,14 @@
         </table>
       </div>
       <div id="notification" class="notification"></div>
+    </div>
+    <div id="confirmDeleteModal" class="modal">
+      <div class="modal-content">
+        <p>Type "delete" to confirm you want to delete this record:</p>
+        <input type="text" id="deleteConfirmationInput" /><br><br>
+        <button style="width: 10rem;" onclick="confirmDelete()">Confirm</button><br><br>
+        <button style="width: 10rem; " id="canceldel" onclick="cancelDelete()">Cancel</button>
+      </div>
     </div>
     <script src="validation.js"></script>
   </body>
