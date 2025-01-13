@@ -155,12 +155,27 @@ function editRow(index) {
   document.getElementById("fullname").value = data.fullname;
   document.getElementById("phone").value = data.phone;
   document.getElementById("email").value = data.email;
+  document.getElementById("address").value = data.address;
   document.getElementById("age").value = data.age;
   document.getElementById("country").value = data.country;
   updateStates();
   document.getElementById("state").value = data.state;
   updateCities();
   document.getElementById("city").value = data.city;
+
+  // const preferredMedium  = data.preferredMedium;
+  // if (preferredMedium) {
+  //   document.querySelector(
+  //     `input[name="preferredMedium"][value="${preferredMedium}"]`
+  //   ).checked = true;
+  // }
+
+  const experience = data.experience;
+  if (experience) {
+    document.querySelector(
+      `input[name="experience"][value="${experience}"]`
+    ).checked = true;
+  }
 
   const gender = data.gender;
   if (gender) {
