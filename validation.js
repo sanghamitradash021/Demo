@@ -141,12 +141,13 @@ function submitForm() {
     storedData[currentRow] = formData;
     showNotification('Form updated successfully');
     currentRow = null;
-  } else {
-    if (!existingData) {
-      storedData.push(formData);
-      showNotification('Form submitted successfully');
-    }
   }
+  // } else {
+  //   if (!existingData) {
+  //     storedData.push(formData);
+  //     showNotification('Form submitted successfully');
+  //   }
+  // }
 
   localStorage.setItem('formData', JSON.stringify(storedData));
   resetForm();
