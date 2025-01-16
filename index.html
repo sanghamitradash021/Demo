@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link href="style.css" /> -->
+    <!-- <link href="working.js" /> -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="flex-container">
+      <h1>Registration Form</h1>
+      <div id="multi-step-form-container">
+        
+        <!-- <div class="formandtable"> -->
+          <!-- Form Steps / Progress Bar -->
+
+          <!-- Step Wise Form Content -->
+          <div class="formonly">
+            <div>
+                <ul
+                  class="form-stepper form-stepper-horizontal text-center mx-auto pl-0"
+                >
+                  <!-- Step 1 -->
+                  <li
+                    class="form-stepper-active text-center form-stepper-list"
+                    step="1"
+                  >
+                    <a class="mx-2">
+                      <span class="form-stepper-circle">
+                        <span>1</span>
+                      </span>
+                      <div class="label">Personal Information</div>
+                    </a>
+                  </li>
+                  <!-- Step 2 -->
+                  <li
+                    class="form-stepper-unfinished text-center form-stepper-list"
+                    step="2"
+                  >
+                    <a class="mx-2">
+                      <span class="form-stepper-circle text-muted">
+                        <span>2</span>
+                      </span>
+                      <div class="label text-muted">Address Information</div>
+                    </a>
+                  </li>
+                  <!-- Step 3 -->
+                  <li
+                    class="form-stepper-unfinished text-center form-stepper-list"
+                    step="3"
+                  >
+                    <a class="mx-2">
+                      <span class="form-stepper-circle text-muted">
+                        <span>3</span>
+                      </span>
+                      <div class="label text-muted">Additional Information</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            <form
+              id="userAccountSetupForm"
+              name="userAccountSetupForm"
+              enctype="multipart/form-data"
+              method="POST"
+            >
+              <!-- Step 1 Content -->
+              <section id="step-1" class="form-step">
+                <h2 class="font-normal">Personal Details</h2>
+                <!-- Step 1 input fields -->
+                <div class="mt-3">
+                  <div class="form-group">
+                    <label for="fullname" class="required">Fullname:</label>
+
+                    <input type="text" id="fullname" name="fullname" required />
+                  </div>
+                  <span id="fullname_error" class="error-message"></span>
+
+                  <!-- Phone -->
+                  <div class="form-group">
+                    <label for="phone" class="required">Phone:</label>
+                    <input type="text" id="phone" name="phone" required />
+                    <br />
+                  </div>
+                  <span id="phone_error" class="error-message"></span>
+
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label for="email" class="required">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                  </div>
+                  <span id="email_error" class="error-message"></span>
+
+                  <!-- Date of Birth -->
+                  <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required />
+                  </div>
+                  <span id="dob_error" class="error-message"></span>
+
+                  <!-- Gender -->
+                  <div class="form-group">
+                    <label for="gender" class="required">Gender:</label>
+                    <input type="radio" id="male" name="gender" value="male" />
+                    <label for="male">Male</label>
+                    <input
+                      type="radio"
+                      id="female"
+                      name="gender"
+                      value="female"
+                    />
+                    <label for="female">Female</label>
+                    <input
+                      type="radio"
+                      id="other"
+                      name="gender"
+                      value="other"
+                    />
+                    <label for="other">Other</label>
+                  </div>
+                  <span id="gender_error" class="error-message"></span>
+                  <!-- Age -->
+                  <div class="form-group">
+                    <label for="age" class="required">Age:</label>
+                    <input type="number" id="age" name="age" required />
+                  </div>
+                  <span id="age_error" class="error-message"></span>
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="button btn-navigate-form-step"
+                    type="button"
+                    step_number="2"
+                  >
+                    Next
+                  </button>
+                </div>
+              </section>
+              <!-- Step 2 Content, default hidden on page load. -->
+              <section id="step-2" class="form-step d-none">
+                <h2 class="font-normal">Address Information</h2>
+                <!-- Step 2 input fields -->
+                <div class="mt-3">
+                  <!-- Address -->
+                  <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required />
+                  </div>
+                  <span id="address_error" class="error-message"></span>
+
+                  <!-- Country, State, City Dropdown -->
+                  <div class="form-group">
+                    <label for="country" class="required">Country:</label>
+                    <select
+                      id="country"
+                      name="country"
+                      onchange="updateStates()"
+                      required
+                    >
+                      <option value="">Select Country</option>
+                      <option value="India">India</option>
+                      <option value="USA">USA</option>
+                      <option value="UK">UK</option>
+                    </select>
+                  </div>
+                  <span id="country_error" class="error-message"></span>
+
+                  <div class="form-group">
+                    <label for="state" class="required">State:</label>
+                    <select
+                      id="state"
+                      name="state"
+                      onchange="updateCities()"
+                      required
+                    >
+                      <option value="">Select State</option>
+                    </select>
+                  </div>
+                  <span id="state_error" class="error-message"></span>
+
+                  <div class="form-group">
+                    <label for="city" class="required">City:</label>
+                    <select id="city" name="city" required>
+                      <option value="">Select City</option>
+                    </select>
+                  </div>
+                  <span id="city_error" class="error-message"></span>
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="button btn-navigate-form-step"
+                    type="button"
+                    step_number="1"
+                  >
+                    Prev
+                  </button><br><br>
+                  <button
+                    class="button btn-navigate-form-step"
+                    type="button"
+                    step_number="3"
+                  >
+                    Next
+                  </button>
+                </div>
+              </section>
+              <!-- Step 3 Content, default hidden on page load. -->
+              <section id="step-3" class="form-step d-none">
+                <h2 class="font-normal">Additional Details</h2>
+                <!-- Step 3 input fields -->
+                <div class="mt-3">
+                  <!-- Experience -->
+                  <div class="form-group">
+                    <label for="experience">Experience:</label>
+                    <input
+                      type="radio"
+                      id="beginner"
+                      name="experience"
+                      value="beginner"
+                    />
+                    <label for="beginner">Beginner</label>
+                    <input
+                      type="radio"
+                      id="intermediate"
+                      name="experience"
+                      value="intermediate"
+                    />
+                    <label for="intermediate">Intermediate</label>
+                    <input
+                      type="radio"
+                      id="expert"
+                      name="experience"
+                      value="expert"
+                    />
+                    <label for="expert">Expert</label>
+                  </div>
+                  <span id="experience_error" class="error-message"></span>
+
+                  <!-- Preferred Medium -->
+                  <div class="form-group">
+                    <label for="preferredMedium">Preferred Medium:</label>
+                    <select id="preferredMedium" name="preferredMedium">
+                      <option value="Oil">Oil</option>
+                      <option value="Acrylic">Acrylic</option>
+                      <option value="Watercolor">Watercolor</option>
+                      <option value="Pastel">Pastel</option>
+                    </select>
+                  </div>
+                  <span id="preferredMedium_error" class="error-message"></span>
+
+<!-- Preferred Date -->
+<div class="form-group">
+    <label for="preferredDate">Preferred Medium:</label>
+    <select id="preferredDate" name="preferredDate">
+      <option value="FEB-1">FEB-1</option>
+      <option value="FEB-2">FEB-2</option>
+      <option value="FEB-3">FEB-3</option>
+      <option value="FEB-4">FEB-4</option>
+    </select>
+  </div>
+  <span id="preferredMedium_error" class="error-message"></span> 
+                </div>
+                <div class="mt-3">
+                  <button
+                    class="button btn-navigate-form-step"
+                    type="button"
+                    step_number="2"
+                  >
+                    Prev
+                  </button><br><br>
+                  <button class="button submit-btn" type="submit">Save</button>
+                </div>
+              </section>
+            </form>
+          </div>
+
+          <div class="table-container">
+            <h1>Submitted Information</h1>
+            <table id="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Country</th>
+                  <!-- <th>State</th> -->
+                  <!-- <th>City</th> -->
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        <!-- </div> -->
+      </div>
+
+      <!-- right cotnainer -->
+    </div>
+    <script src="working.js"></script>
+  </body>
+</html>
