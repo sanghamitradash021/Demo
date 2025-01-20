@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Stepper Form</title>
+    <link rel="stylesheet" href="reveal-module.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="newfile3.js" defer></script> -->
+    <script src="reveal-module.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="stepper">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Basic Info</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Address Info</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Additional Info</div>
+                </div>
+            </div>
+
+            <form id="stepper-form">
+                <div class="form-step active" id="step1">
+                    <h2 class="form-heading">Basic Information</h2>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                    <!-- More form fields... -->
+                    <button type="button" class="btn" data-next="2">Next</button>
+                </div>
+                <div class="form-step" id="step2">
+                    <h2 class="form-heading">Address Information</h2>
+                    <!-- Form fields for address -->
+                    <button type="button" class="btn" data-prev="1">Back</button>
+                    <button type="button" class="btn" data-next="3">Next</button>
+                </div>
+                <div class="form-step" id="step3">
+                    <h2 class="form-heading">Other Information</h2>
+                    <!-- Additional form fields -->
+                    <button type="button" class="btn" data-prev="2">Back</button>
+                    <button type="button" class="btn" data-submit>Submit</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h2 class="table-heading">Submitted Data</h2>
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <!-- More table headers -->
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="preview-modal">
+        <div class="modal-content">
+            <h2 class="modal-heading">Preview Information</h2>
+            <div id="preview-content"></div>
+            <div class="modal-buttons">
+                <button class="btn" onclick="formModule.hideModal('preview-modal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="submit-modal">
+        <div class="modal-content">
+            <h2 class="modal-heading">Are you sure you want to submit?</h2>
+            <div class="modal-buttons">
+                <button class="btn" onclick="formModule.submitData()">Yes</button>
+                <button class="btn" onclick="formModule.hideModal('submit-modal')">No</button>
+            </div>
+        </div>
+    </div>
+    <script src="reveal-module.js"></script>
+</body>
+
+</html>
