@@ -21,20 +21,20 @@
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div id="show-time" class="hide">text..</div>
     <div class="main-container">
         <div class="form-container">
             <div class="stepper">
                 <div class="step active">
-                    <div class="step-number">1</div>
+                    <div class="step-number1">1</div>
                     <div class="step-label">Personal</div>
                 </div>
                 <div class="step">
-                    <div class="step-number">2</div>
+                    <div class="step-number2">2</div>
                     <div class="step-label">Address</div>
                 </div>
                 <div class="step">
-                    <div class="step-number">3</div>
+                    <div class="step-number3">3</div>
                     <div class="step-label">Preview</div>
                 </div>
                 <div class="step-connector-progress"></div>
@@ -86,8 +86,8 @@
 
                     <div class="button-group">
                         <div></div>
-                        <button type="button" class="next-btn" onclick="nextPage(1)">Next</button>
-                        <!-- <button type="button" class="next-btn">Next</button> -->
+                        <!-- <button type="button" class="next-btn" onclick="nextPage(1)">Next</button> -->
+                        <button type="button" class="next-btn">Next</button>
                     </div>
                 </div>
 
@@ -97,19 +97,19 @@
                         <label for="address">Address *</label>
                         <input type="text" id="address" required placeholder=" ">
                     </div>
-                    <span id="addressError" class="error-message"></span>
+                    <span id="address_error" class="error-message"></span>
 
                     <div class="form-group">
                         <label for="country">Country *</label>
                         <input type="text" id="country" required placeholder=" ">
                     </div>
-                    <span id="countryError" class="error-message"></span>
+                    <span id="country_error" class="error-message"></span>
 
                     <div class="form-group">
                         <label for="state">State *</label>
                         <input type="text" id="state" required placeholder=" ">
                     </div>
-                    <span id="stateError" class="error-message"></span>
+                    <span id="state_error" class="error-message"></span>
 
                     <div class="form-group">
                         <label for="city">City *</label>
@@ -124,8 +124,8 @@
                     <span id="zipError" class="error-message"></span>
 
                     <div class="button-group">
-                        <button type="button" class="prev-btn" onclick="prevPage(2)">Previous</button>
-                        <button type="button" class="next-btn" onclick="nextPage(2)">Next</button>
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
                     </div>
                 </div>
 
@@ -171,7 +171,16 @@
 
     <script src="script.js"></script>
 
-    
+     <!-- <script src="formData.js"></script> 
+    <script src="formValidation.js"></script>
+    <script src="stepper.js"></script>
+    <script src="Main.js"></script>  -->
+
+    <!-- <script src="formValidation.js"></script>
+    <script src="stepper.js"></script>
+    <script src="formData.js"></script>
+    <script src="formModule.js"></script>
+    <script src="Main.js"></script> -->
 </body>
 
 </html>

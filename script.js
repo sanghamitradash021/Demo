@@ -249,8 +249,8 @@ function updateTable() {
                         </button>
                     </td>
                 `;
-        tableBody.appendChild(row);
-        // tableBody.insertBefore(row, tableBody.firstChild);
+        // tableBody.appendChild(row);
+        tableBody.insertBefore(row, tableBody.firstChild);
     });
 
     localStorage.setItem("formData", JSON.stringify(formData));
@@ -379,23 +379,6 @@ const validationRules = {
             errorMessage: "ZIP code must be a valid 5-digit number.",
         },
     },
-    address: {
-        required: true,
-        // errorMessage:"address  is required.",
-        error: { message: " address is required." },
-        
-    },
-    country: {
-        required: true,
-        // errorMessage:"country is required.",  
-        error: { message: "country  is required." },      
-    },
-    state: {
-        required: true,
-        // errorMessage:"state is required.",
-        error: { message: "state is required." },
-        
-    },
 };
 
 // Validate a single field
@@ -419,7 +402,7 @@ function validateField(fieldName, value) {
 
     console.log("value :: ", value, "  validationRules:;  ", fieldName);
     // Custom validation logic
-    // console.log("nn: ", rules.customValidation.validate(value));
+    console.log("nn: ", rules.customValidation.validate(value));
     if (rules.customValidation && !rules.customValidation.validate(value)) {
         errors.push(rules.customValidation.errorMessage);
     }
@@ -508,7 +491,6 @@ form.addEventListener("submit", function (e) {
     } else {
         // Add new entry
         formData.unshift(data);
-        console.log( localStorage.getItem("formData"));
     }
 
     // Update table and reset form
@@ -530,210 +512,3 @@ form.addEventListener("submit", function (e) {
     // Reset step connector progress
     updateStepperProgress(1);
 });
-
-
-// const form = $("#stepperForm");
-// const pages = $(".form-page");
-// const steps = $(".step");
-// const submitBtn = $("#submitBtn");
-// const editIndex = $("#editIndex");
-// const stepConnectorProgress = $(".step-connector-progress");
-// let formData = [];
-
-// $(document).ready(function () {
-//     const savedData = localStorage.getItem("formData");
-//     if (savedData) {
-//         formData = JSON.parse(savedData);
-//         updateTable();
-//     }
-
-//     $("#dob").change(function () {
-//         const dob = new Date($(this).val());
-//         const today = new Date();
-//         let age = today.getFullYear() - dob.getFullYear();
-//         const monthDiff = today.getMonth() - dob.getMonth();
-
-//         if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
-//             age--;
-//         }
-
-//         $("#age").val(age);
-//     });
-
-//     steps.each(function (index) {
-//         $(this).click(function () {
-//             const stepIndex = index + 1;
-//             let canNavigate = true;
-
-//             for (let i = 1; i < stepIndex; i++) {
-//                 if (!validatePage(i)) {
-//                     alert(`Please complete page ${i} before proceeding.`);
-//                     canNavigate = false;
-//                     break;
-//                 }
-//             }
-
-//             if (canNavigate) {
-//                 pages.removeClass("active");
-//                 $(`#page${stepIndex}`).addClass("active");
-
-//                 steps.removeClass("active");
-//                 $(this).addClass("active");
-
-//                 updateStepperProgress(stepIndex);
-//             }
-//         });
-//     });
-
-//     form.submit(function (e) {
-//         e.preventDefault();
-
-//         const data = getFormData();
-
-//         const hasValue = Object.values(data).some(value => value.trim() !== '');
-//         if (!hasValue) {
-//             alert("Please fill in at least one field before submitting.");
-//             return;
-//         }
-
-//         const formValidation = validateForm(data);
-//         if (!formValidation.isValid) {
-//             for (const field in formValidation.errors) {
-//                 const errorMessages = formValidation.errors[field];
-//                 const errorField = $(`#${field}`);
-
-//                 const errorElement = $(`#${field}Error`);
-//                 if (errorElement.length) {
-//                     errorElement.text(errorMessages.join(", "));
-//                 }
-
-//                 errorField.css("border-color", "red");
-
-//                 const pageWithError = pages.toArray().findIndex(page => $(page).find(errorField).length > 0) + 1;
-//                 if (pageWithError > 0) {
-//                     pages.removeClass("active");
-//                     $(`#page${pageWithError}`).addClass("active");
-
-//                     steps.removeClass("active");
-//                     steps.eq(pageWithError - 1).addClass("active");
-//                 }
-//             }
-//             return;
-//         }
-
-//         if (editIndex.val() !== "") {
-//             formData[editIndex.val()] = data;
-//             editIndex.val("");
-//             submitBtn.text("Submit");
-//         } else {
-//             formData.unshift(data);
-//         }
-
-//         updateTable();
-//         form[0].reset();
-
-//         pages.removeClass("active");
-//         $("#page1").addClass("active");
-
-//         steps.removeClass("active");
-//         steps.first().addClass("active");
-
-//         updateStepperProgress(1);
-//     });
-// });
-
-// function validatePage(pageNumber) {
-//     const currentPageElement = $(`#page${pageNumber}`);
-//     const inputs = currentPageElement.find("input[required], select[required]");
-//     let isValid = true;
-
-//     inputs.each(function () {
-//         if (!$(this).val()) {
-//             isValid = false;
-//         }
-//     });
-
-//     return isValid;
-// }
-
-// function updateStepperProgress(currentStep) {
-//     const progress = ((currentStep - 1) / 2) * 100;
-//     stepConnectorProgress.css("width", `${progress}%`);
-// }
-
-// function getFormData() {
-//     return {
-//         fullName: $("#fullName").val(),
-//         phone: $("#phone").val(),
-//         email: $("#email").val(),
-//         dob: $("#dob").val(),
-//         age: $("#age").val(),
-//         gender: $("#gender").val(),
-//         address: $("#address").val(),
-//         country: $("#country").val(),
-//         state: $("#state").val(),
-//         city: $("#city").val(),
-//         zip: $("#zip").val(),
-//     };
-// }
-
-// function updateTable() {
-//     const tableBody = $("#dataTableBody");
-//     tableBody.empty();
-
-//     formData.forEach((data, index) => {
-//         const row = $("<tr>").html(`
-//             <td>${data["fullName"]}</td>
-//             <td>${data["phone"]}</td>
-//             <td>${data["email"]}</td>
-//             <td>${data["state"]}</td>
-//             <td class="action-buttons">
-//                 <button class="edit" onclick="editEntry(${index})">
-//                     <i class="fas fa-edit"></i>
-//                     Edit
-//                 </button>
-//                 <button class="delete" onclick="deleteEntry(${index})">
-//                     <i class="fas fa-trash"></i>
-//                     Delete
-//                 </button>
-//             </td>
-//         `);
-//         tableBody.append(row);
-//     });
-
-//     localStorage.setItem("formData", JSON.stringify(formData));
-// }
-
-// function editEntry(index) {
-//     const data = formData[index];
-
-//     $("#fullName").val(data["fullName"]);
-//     $("#phone").val(data["phone"]);
-//     $("#email").val(data["email"]);
-//     $("#dob").val(data["dob"]);
-//     $("#age").val(data["age"]);
-//     $("#gender").val(data["gender"]);
-//     $("#address").val(data["address"]);
-//     $("#country").val(data["country"]);
-//     $("#state").val(data["state"]);
-//     $("#city").val(data["city"]);
-//     $("#zip").val(data["zip"]);
-
-//     editIndex.val(index);
-//     submitBtn.text("Update");
-
-//     pages.removeClass("active");
-//     $("#page1").addClass("active");
-
-//     steps.removeClass("active");
-//     steps.first().addClass("active");
-
-//     updateStepperProgress(1);
-// }
-
-// function deleteEntry(index) {
-//     if (confirm("Are you sure you want to delete this entry?")) {
-//         formData.splice(index, 1);
-//         updateTable();
-//     }
-// }
